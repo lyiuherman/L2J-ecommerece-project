@@ -7,8 +7,11 @@ const {
     postsignup,
     getmyaccount,
     getmyOrder,
-    getwishlist
+    getwishlist,
+    verifyotp
 }= require("../controller/userController")
+const UserOTPverification = require("../model/otp")
+
 
 router.get("/",getlanding);
 router.get("/login",getlogin);
@@ -17,7 +20,7 @@ router.post("/signup",postsignup);
 router.get("/myAccount",getmyaccount);
 router.get("/myOrder",getmyOrder);
 router.get("/wishlist",getwishlist);
-
+router.post("/verify-otp",verifyotp)
 
 module.exports = router
 
