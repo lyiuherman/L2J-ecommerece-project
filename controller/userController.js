@@ -1,6 +1,8 @@
 const UserOTPverification = require("../model/otp");
 const User = require("../model/user");
 const nodemailer = require("nodemailer")
+const bcrypt = require('bcrypt');
+
 const getlanding = (req, res) => {
   try {
     res.render("landingpage");
@@ -31,18 +33,30 @@ const getsignup = (req, res) => {
     console.log("err");
   }
 };
-const postsignup =
-  ("/signup",
-  async (req, res) => {
-    try {
-      
-      res.render("loginRegister", { showOTPField: true });
+const postsignup = async (req, res) => {
+  try {
 
-    } catch (error) {
-      console.log(error);
-      res.status(500).send("Internal Server Error");
+    const data = {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      confirmPassword:req.body.confirmPassword,
+      
+    };
+
+
+    console.log(data);
+    await User.insertMany([data]);
+    if (!req.session.id) {
+      res.render("user/landingpage");
+    } else {
+      res.redirect("/");
     }
-  });
+    
+  } catch (error) {
+    console.log(error);
+  }
+};
  
 
 const sendOTPverificationEmail = async ({ name, email }, res) => {
@@ -50,7 +64,7 @@ const sendOTPverificationEmail = async ({ name, email }, res) => {
     const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
 
     const mailoption = {
-      from: process.env.AUTH_EMAIL,
+      from: process.env.email,
       to: email,
       subject: "verify you email",
       // html: (
@@ -61,8 +75,8 @@ const sendOTPverificationEmail = async ({ name, email }, res) => {
       // ),
     };
 
-    const saltROund = 10;
-    const hashedotp = await bcrypt.hash(otp,saltROund);
+    const saltRounds = 10;
+    const hashedOTP = await bcrypt.hash(otp, saltRounds);
     new UserOTPverification({
       userID : __dirname,
       otp : hashedotp,

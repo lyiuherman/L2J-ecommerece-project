@@ -11,9 +11,10 @@ mongoose
 
 // Define user schema
 const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  name: { type: String,  },
+  email: { type: String,  },
+  password: { type: String,},
+  confirmPassword: { type: String, },
 });
 
 // Create User model
