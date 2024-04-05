@@ -11,11 +11,13 @@ mongoose
 
 // Define user schema
 const userSchema = new mongoose.Schema({
-  name: { type: String,  },
-  email: { type: String,  },
-  password: { type: String,},
-  confirmPassword: { type: String, },
+  name: { type: String, required: true }, // 'required' ensures that this field is mandatory
+  email: { type: String, required: true, unique: true }, // 'unique' ensures that each email is unique in the database
+  password: { type: String, required: true, minlength: 6 }, // 'minlength' ensures that the password has at least 6 characters
+  // confirmPassword: { type: String, required: true }, // You might want to validate this separately in your application logic
+  verified: Boolean
 });
+
 
 // Create User model
 const User = mongoose.model("User", userSchema);

@@ -1,25 +1,29 @@
-const express = require('express');
-const router = express.Router();
 const {
-    getlanding,
-    getlogin,
-    getsignup,
-    postsignup,
-    getmyaccount,
-    getmyOrder,
-    getwishlist,
-   
-}= require("../controller/userController")
-const UserOTPverification = require("../model/otp")
+  getlanding,
+  getmyaccount,
+  getOtp,
+  postOtp,
+  getlogin,
+  postLogin,
+  postSignup,
+  getmyOrder,
+  getwishlist,
+} = require("../controller/userController");
+const express = require("express");
+const router = express.Router();
+const userController = require("../controller/userController");
+const otp = require("../controller/otp");
 
-
-router.get("/",getlanding);
+// Define routes for user authentication
 router.get("/login",getlogin);
-router.get("/signup",getsignup);
-router.post("/signup",postsignup);
-router.get("/myAccount",getmyaccount);
-router.get("/myOrder",getmyOrder);
-router.get("/wishlist",getwishlist);
+router.post("/signup", postSignup,);
+router.post("/login", postLogin );
+router.get("/views/user/otp", getOtp);
+router.post("/views/user/otp",postOtp);
+router.get("/resendOTP",getOtp);
+router.get("/", getlanding);
+router.get("/myAccount", getmyaccount);
+router.get("/myOrder", getmyOrder);
+router.get("/wishlist", getwishlist);
 
-module.exports = router
-
+module.exports = router;

@@ -52,3 +52,48 @@
 // };
 
 // module.exports = { sendOTP };
+
+
+
+const nodemailer = require('nodemailer');
+
+const sendOTP = async (email) => {
+    try {
+        const otp = Math.floor(100000 + Math.random() * 900000); // Generate 6-digit OTP
+        // Send OTP via email
+        let transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'leeronsajesh122@gmail.com',
+                pass: 'Lironn@122'
+            }
+        });
+        await transporter.sendMail({
+            from: '"leeronsajesh123@gamilcom',
+            to: email,
+            subject: 'OTP for verification',
+            text: `Your OTP is ${otp}`
+        });
+        return otp;
+    } catch (error) {
+        throw new Error('Failed to send OTP');
+    }
+};
+
+const verifyOTP = async (req, res) => {
+    try {
+        const { email, otp } = req.body;
+        // Validate OTP
+        // For simplicity, let's assume the OTP is correct
+        // In real-world scenarios, you would compare it with the OTP sent to the user
+        // via email or SMS and then proceed accordingly.
+        res.send('OTP verified successfully');
+    } catch (error) {
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+module.exports = {
+    sendOTP,
+    verifyOTP
+};
