@@ -1,11 +1,11 @@
-const User = require("../model/user");
+const User = require("../../model/user");
 const bcrypt = require("bcrypt");
-const router = require("../routes/userRoute");
-const transport = require("../services/sentOTP");
+const router = require("../../routes/userRoute");
+const transport = require("../../services/sentOTP");
 require("dotenv").config();
 const path = require("path");
 const otp = require("./otp");
-const userData = require("../model/user");
+const userData = require("../../model/user");
 
 const nodemailer = require("nodemailer");
 

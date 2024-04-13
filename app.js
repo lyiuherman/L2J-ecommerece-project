@@ -3,9 +3,10 @@ const session = require('express-session');
 const userRoutes = require("../L2J-ecommerece-project/routes/userRoute");
 const app = express();
 const morgan = require('morgan');
+const path = require('path');
 
 app.set("view engine", "ejs");
-app.set('views','./views/user')
+// app.set('views',['./views/user',"./views/admin"])
 app.use(morgan("dev"))
 app.use(express.static(__dirname + "/public"));
 
@@ -19,7 +20,10 @@ app.use(session({
 }));
 
 
+const adminrouter = require("./routes/admin");
+const collection = require("./controller/admin/adminContoller");
 
+app.use("/admin", adminrouter);
 
 
 app.use(userRoutes);

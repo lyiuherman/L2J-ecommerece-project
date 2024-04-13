@@ -8,11 +8,9 @@ const {
   postSignup,
   getmyOrder,
   getwishlist,
-} = require("../controller/userController");
+} = require("../controller/user/userController");
 const express = require("express");
 const router = express.Router();
-const userController = require("../controller/userController");
-const otp = require("../controller/otp");
 
 // Define routes for user authentication
 router.get("/login",getlogin);
