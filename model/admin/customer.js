@@ -24,22 +24,22 @@ Taxrate:{
     type:String,
     required: true
 },
-Width:{
-    type:String,
-    required: true
-},
-Height:{
-    type:String,
-    required: true
-},
-Shippingfees:{
-    type:String,
-    required: true
-},
-Weight:{
-    type:String,
-    required: true
-},
+// Width:{
+//     type:String,
+//     required: true
+// },
+// Height:{
+//     type:String,
+//     required: true
+// },
+// Shippingfees:{
+//     type:String,
+//     required: true
+// },
+// Weight:{
+//     type:String,
+//     required: true
+// },
 createdAt:{
     type:Date,
   

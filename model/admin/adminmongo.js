@@ -1,15 +1,6 @@
 const mongoose = require("mongoose");
 
 
-mongoose
-  .connect("mongodb://localhost:27017/mydb")
-  .then(() => {
-    console.log("admin-mongose connected");
-  })
-
-  .catch(() => {
-    console.log("not Connected");
-  });
 
 const loginschema = new mongoose.Schema({
   name: {

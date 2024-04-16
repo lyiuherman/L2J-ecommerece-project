@@ -7,7 +7,11 @@ const {
   postLogin,
   postSignup,
   getmyOrder,
+  app,
+  apps,
   getwishlist,
+  auths,
+  authf,
 } = require("../controller/user/userController");
 const express = require("express");
 const router = express.Router();
@@ -23,5 +27,9 @@ router.get("/", getlanding);
 router.get("/myAccount", getmyaccount);
 router.get("/myOrder", getmyOrder);
 router.get("/wishlist", getwishlist);
+router.get("/auth/google", app);
+router.get("/auth/google/callback", apps);
+router.get("/auth/google/success", auths);
+router.get("/auth/google/failure", authf);
 
 module.exports = router;

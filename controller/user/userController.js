@@ -6,6 +6,7 @@ require("dotenv").config();
 const path = require("path");
 const otp = require("./otp");
 const userData = require("../../model/user");
+const passport = require('passport');
 
 const nodemailer = require("nodemailer");
 
@@ -245,6 +246,25 @@ const postSignup = async (req, res) => {
   }
 };
 
+const app = passport.authenticate("google", { scope: 
+  ["email", "profile"] });
+
+const apps =(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/auth/google/success",
+    failureRedirect: "/auth/google/failure",
+  })
+);
+
+const auths = (req,res) =>{
+  let name =  req.body.name
+  res.render("landingpage")
+}
+const authf = (req,res) =>{
+  res.send('something went wrong')
+}
+
 // const loadhome = async(req,res)=>{
 //   try {
 //     res.render("landingpage")
@@ -262,4 +282,9 @@ module.exports = {
   getOtp,
   postOtp,
   postLogin,
+  app,
+  apps,
+  auths,
+  authf
+
 };
